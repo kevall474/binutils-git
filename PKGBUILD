@@ -14,7 +14,7 @@ pkgname=binutils-git
 # grap pkver
 #(cd binutils-gdb && cat binutils/configure | grep "PACKAGE_VERSION=")
 pkgver=2.36.50
-pkgrel=2
+pkgrel=1
 pkgdesc='A set of programs to assemble and manipulate binary and object files'
 arch=(x86_64)
 url='https://www.gnu.org/software/binutils/'
@@ -31,7 +31,7 @@ md5sums=('SKIP')
 
 pkgver(){
   cd binutils-gdb
-  echo 2.36.50.$(date -I | sed 's/-/_/' | sed 's/-/_/').$(git rev-list --count HEAD).$(git rev-parse --short HEAD)
+  echo $(cat binutils/configure | grep 'PACKAGE_VERSION=' | sed 's/PACKAGE_VERSION=//' | sed "s/'//" | sed "s/'//").$(date -I | sed 's/-/_/' | sed 's/-/_/').$(git rev-list --count HEAD).$(git rev-parse --short HEAD)
 }
 
 prepare() {
